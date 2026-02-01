@@ -1,4 +1,4 @@
-package model;
+package kz.aitu.transport.model;
 
 public class Bus extends Vehicle {
     private int capacity;
@@ -42,6 +42,6 @@ public class Bus extends Vehicle {
 
     @Override
     public String getType() {
-        return "model.Bus";
+        return "kz.aitu.transport.model.Bus";
     }
 }

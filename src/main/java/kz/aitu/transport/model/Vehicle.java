@@ -1,4 +1,4 @@
-package model;
+package kz.aitu.transport.model;
 
 import java.util.Objects;
 

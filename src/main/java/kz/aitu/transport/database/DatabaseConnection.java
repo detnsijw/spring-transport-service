@@ -1,4 +1,4 @@
-package database;
+package kz.aitu.transport.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

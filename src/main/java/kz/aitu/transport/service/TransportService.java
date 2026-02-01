@@ -1,8 +1,8 @@
-package service;
+package kz.aitu.transport.service;
 
-import model.Bus;
-import model.Lrt;
-import model.Passenger;
+import kz.aitu.transport.model.Bus;
+import kz.aitu.transport.model.Lrt;
+import kz.aitu.transport.model.Passenger;
 
 import java.sql.*;
 

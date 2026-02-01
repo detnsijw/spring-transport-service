@@ -1,9 +1,12 @@
-package service;
+package kz.aitu.transport.service;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import database.DatabaseConnection;
-import model.Passenger;
+import kz.aitu.transport.database.DatabaseConnection;
+import kz.aitu.transport.model.Bus;
+import kz.aitu.transport.model.Passenger;
 
 public class PassengerService {
     public void registerPassenger(Passenger passenger) throws SQLException {
@@ -17,6 +20,32 @@ public class PassengerService {
             ps.setDouble(3, passenger.getBalance());
             ps.executeUpdate();
         }
+    }
+
+    public List<Passenger> getAllPassengers() {
+        List<Passenger> passengers = new ArrayList<>();
+        String sql = "SELECT * FROM passenger";
+
+        try (Connection con = DatabaseConnection.getConnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Passenger passenger = new Passenger(
+                        rs.getString("name"),
+                        rs.getInt("card_id"),
+                        rs.getDouble("balance")
+                );
+
+                passengers.add(passenger);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to fetch passengers");
+        }
+
+        return passengers;
     }
 
     public Passenger getPassengerById(int cardId) throws SQLException {

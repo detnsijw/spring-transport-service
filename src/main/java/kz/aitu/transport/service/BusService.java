@@ -1,7 +1,7 @@
-package service;
+package kz.aitu.transport.service;
 
-import database.DatabaseConnection;
-import model.Bus;
+import kz.aitu.transport.database.DatabaseConnection;
+import kz.aitu.transport.model.Bus;
 
 import java.sql.*;
 import java.util.ArrayList;

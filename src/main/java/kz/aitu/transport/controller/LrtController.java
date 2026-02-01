@@ -1,16 +1,21 @@
-package controller;
+package kz.aitu.transport.controller;
 
-import model.Lrt;
+import kz.aitu.transport.model.Lrt;
 import org.springframework.web.bind.annotation.*;
-import service.LrtService;
+import kz.aitu.transport.service.LrtService;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/lrts")
 public class LrtController {
-
     private final LrtService service = new LrtService();
+
+    @GetMapping
+    public List<Lrt> getAllLrts() throws SQLException {
+        return service.getAllLrts();
+    }
 
     @GetMapping("/{id}")
     public Lrt getLrt(@PathVariable int id) throws SQLException {

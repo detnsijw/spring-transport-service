@@ -1,6 +1,6 @@
-package model;
+package kz.aitu.transport.model;
 
-import database.DatabaseConnection;
+import kz.aitu.transport.database.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,7 +73,7 @@ public class Passenger implements Payable {
     }
 
     public String getType() {
-        return "model.Passenger";
+        return "kz.aitu.transport.model.Passenger";
     }
 
     public static void insertPassenger(int cardId, String name, double balance) {
@@ -128,7 +128,7 @@ public class Passenger implements Payable {
 
     @Override
     public String toString() {
-        return "model.Passenger{" +
+        return "kz.aitu.transport.model.Passenger{" +
                 "name='" + name + '\'' +
                 ", cardId='" + cardId + '\'' +
                 ", balance=" + balance +

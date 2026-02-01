@@ -1,4 +1,4 @@
-package model;
+package kz.aitu.transport.model;
 
 public class StudentPassenger extends Passenger {
     private double discount;
