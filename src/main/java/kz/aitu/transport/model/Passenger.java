@@ -76,56 +76,6 @@ public class Passenger implements Payable {
         return "Passenger";
     }
 
-    public static void insertPassenger(int cardId, String name, double balance) {
-        String sql = "INSERT INTO passenger(card_id, name, balance) VALUES (?, ?, ?)";
-
-        try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setInt(1, cardId);
-            ps.setString(2, name);
-            ps.setDouble(3, balance);
-            ps.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void getAllPassengers() {
-        String sql = "SELECT * FROM passenger";
-
-        try (Connection con = DatabaseConnection.getConnection();
-             Statement st = con.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
-
-            while (rs.next()) {
-                System.out.println(
-                        rs.getInt("card_id") + " " +
-                                rs.getString("name") + " " +
-                                rs.getDouble("balance")
-                );
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void updateBalance(int cardId, double newBalance) {
-        String sql = "UPDATE passenger SET balance = ? WHERE card_id = ?";
-
-        try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
-
-            ps.setDouble(1, newBalance);
-            ps.setInt(2, cardId);
-            ps.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public String toString() {
         return "kz.aitu.transport.model.Passenger{" +
