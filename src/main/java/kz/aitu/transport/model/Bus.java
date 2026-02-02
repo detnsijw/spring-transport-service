@@ -42,6 +42,6 @@ public class Bus extends Vehicle {
 
     @Override
     public String getType() {
-        return "kz.aitu.transport.model.Bus";
+        return "Bus";
     }
 }

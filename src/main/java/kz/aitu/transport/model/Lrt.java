@@ -42,6 +42,6 @@ public class Lrt extends Vehicle {
 
     @Override
     public String getType() {
-        return "kz.aitu.transport.model.Lrt";
+        return "Lrt";
     }
 }

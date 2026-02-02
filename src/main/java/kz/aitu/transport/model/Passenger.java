@@ -73,7 +73,7 @@ public class Passenger implements Payable {
     }
 
     public String getType() {
-        return "kz.aitu.transport.model.Passenger";
+        return "Passenger";
     }
 
     public static void insertPassenger(int cardId, String name, double balance) {

@@ -1,20 +1,26 @@
 package kz.aitu.transport.controller;
 
 import kz.aitu.transport.model.Lrt;
+import kz.aitu.transport.service.TransportService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import kz.aitu.transport.service.LrtService;
 
 import java.sql.SQLException;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/lrts")
+@Controller
+@RequestMapping("/lrts")
 public class LrtController {
     private final LrtService service = new LrtService();
+    private final TransportService transportService = new TransportService();
 
     @GetMapping
-    public List<Lrt> getAllLrts() throws SQLException {
-        return service.getAllLrts();
+    public String getAllLrts(Model model) throws SQLException {
+        List<Lrt> lrts = service.getAllLrts();
+        model.addAttribute("lrts", lrts);
+        return "lrts";
     }
 
     @GetMapping("/{id}")
@@ -22,9 +28,28 @@ public class LrtController {
         return service.getLrtById(id);
     }
 
-    @PostMapping
-    public String addLrt(@RequestBody Lrt lrt) throws SQLException {
+    @PostMapping("/add")
+    public String addLrt(@RequestParam int id,
+                         @RequestParam String routeName,
+                         @RequestParam int capacity) throws SQLException {
+        Lrt lrt = new Lrt(id, routeName, capacity);
         service.addLrt(lrt);
-        return "Lrt added";
+        return "redirect:/lrts";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteLrtById(@PathVariable int id) throws SQLException {
+        service.deleteLrt(id);
+        return "redirect:/lrts";
+    }
+
+    @PostMapping("/ride")
+    public String ride(
+            @RequestParam int lrtId,
+            @RequestParam int passengerId,
+            @RequestParam double fare
+    ) throws SQLException {
+        transportService.rideLrt(lrtId, passengerId, fare);
+        return "redirect:/lrts";
     }
 }

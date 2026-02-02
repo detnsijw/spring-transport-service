@@ -10,7 +10,7 @@ import java.util.List;
 public class LrtService {
     public void addLrt(Lrt lrt) throws SQLException {
         String sql = """
-                INSERT INTO lrt(id, route_name, capacity, current_passengers)
+                INSERT INTO lrt(lrt_id, route_name, capacity, current_passengers)
                 VALUES (?, ?, ?, ?)
                 """;
 
@@ -27,7 +27,7 @@ public class LrtService {
     }
 
     public Lrt getLrtById(int id) throws SQLException {
-        String sql = "SELECT * FROM lrt WHERE id = ?";
+        String sql = "SELECT * FROM lrt WHERE lrt_id = ?";
 
         try (Connection con = DatabaseConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -37,7 +37,7 @@ public class LrtService {
 
             if (rs.next()) {
                 Lrt lrt = new Lrt(
-                        rs.getInt("id"),
+                        rs.getInt("lrt_id"),
                         rs.getString("route_name"),
                         rs.getInt("capacity")
                 );
@@ -63,7 +63,7 @@ public class LrtService {
 
             while (rs.next()) {
                 Lrt lrt = new Lrt(
-                        rs.getInt("id"),
+                        rs.getInt("lrt_id"),
                         rs.getString("route_name"),
                         rs.getInt("capacity")
                 );
@@ -83,7 +83,7 @@ public class LrtService {
         String sql = """
             UPDATE lrt
             SET current_passengers = ?
-            WHERE id = ?
+            WHERE lrt_id = ?
             """;
 
         try (Connection con = DatabaseConnection.getConnection();
@@ -96,7 +96,7 @@ public class LrtService {
     }
 
     public void deleteLrt(int lrtId) throws SQLException {
-        String sql = "DELETE FROM lrt WHERE id = ?";
+        String sql = "DELETE FROM lrt WHERE lrt_id = ?";
 
         try (Connection con = DatabaseConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
